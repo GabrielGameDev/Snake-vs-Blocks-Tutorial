@@ -8,6 +8,12 @@ public class LevelController : MonoBehaviour {
 
 	public float gameSpeed = 2;
 
+	public int obstaclesAmount = 6;
+
+	public float damageTime = 0.1f;
+
+	public Color easyColor, mediumColor, hardColor;
+
 	private void Awake()
 	{
 		instance = this;
