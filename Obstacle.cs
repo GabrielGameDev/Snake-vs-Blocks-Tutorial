@@ -81,6 +81,7 @@ public class Obstacle : MonoBehaviour {
 	void PlayerDamage()
 	{
 		nextTime = Time.time + LevelController.instance.damageTime;
+		player.TakeDamage();
 		amount--;
 		SetAmountText();
 		if(amount <= 0)

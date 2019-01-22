@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour {
 
 	public float speed = 5;
+
+	public Text livesText;
 
 	private float mouseDistance;
 	private Rigidbody2D rb;
@@ -34,4 +37,25 @@ public class Player : MonoBehaviour {
 	{
 		rb.velocity = new Vector2(mouseDistance * speed, LevelController.instance.gameSpeed);
 	}
+
+	public void SetText(int amount)
+	{
+		livesText.text = amount.ToString();
+	}
+
+	public void TakeDamage()
+	{
+		int children = transform.childCount;
+		if(children <= 1)
+		{
+
+		}
+		else
+		{
+			Destroy(transform.GetChild(children - 1).gameObject);
+		}
+
+		SetText(children - 1);
+	}
+
 }

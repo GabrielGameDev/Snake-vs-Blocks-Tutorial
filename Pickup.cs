@@ -32,6 +32,14 @@ public class Pickup : MonoBehaviour {
 					followTarget.target = other.transform.GetChild(index - 1);
 				}
 			}
+
+			Player player = other.GetComponent<Player>();
+			if(player != null)
+			{
+				player.SetText(player.transform.childCount);
+			}
+
+			gameObject.SetActive(false);
 		}
 	}
 }
