@@ -14,6 +14,8 @@ public class LevelController : MonoBehaviour {
 
 	public Color easyColor, mediumColor, hardColor;
 
+	public float obstaclesDistance = 13;
+
 	private void Awake()
 	{
 		instance = this;
