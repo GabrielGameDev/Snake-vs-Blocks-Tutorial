@@ -35,7 +35,7 @@ public class Player : MonoBehaviour {
 
 	private void FixedUpdate()
 	{
-		rb.velocity = new Vector2(mouseDistance * speed, LevelController.instance.gameSpeed);
+		rb.velocity = new Vector2(mouseDistance * speed, LevelController.instance.gameSpeed * LevelController.instance.multiplier);
 	}
 
 	public void SetText(int amount)

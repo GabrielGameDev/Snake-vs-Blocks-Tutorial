@@ -16,6 +16,14 @@ public class LevelController : MonoBehaviour {
 
 	public float obstaclesDistance = 13;
 
+	public ObjectPool pickupPool;
+	public Vector2 xLimit;
+
+	public float multiplier = 1;
+	public float cicleTime = 10;
+
+	private Transform player;
+
 	private void Awake()
 	{
 		instance = this;
@@ -23,11 +31,31 @@ public class LevelController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+
+		player = FindObjectOfType<Player>().transform;
+
+		SpawnPickups();
+
+		InvokeRepeating("IncreaseDifficulty", cicleTime, cicleTime);
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	void IncreaseDifficulty()
+	{
+		obstaclesAmount += 2;
+
+		multiplier *= 1.1f;
+	}
+
+	void SpawnPickups()
+	{
+		pickupPool.GetObject().transform.position = new Vector2(Random.Range(xLimit.x, xLimit.y), player.position.y + 15);
+
+		Invoke("SpawnPickups", Random.Range(1f, 3f));
 	}
 }

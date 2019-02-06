@@ -12,7 +12,7 @@ public class ObjectPool : MonoBehaviour {
 	private int index;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
 
 		prefabs = new GameObject[amount];
 
