@@ -13,6 +13,8 @@ public class Player : MonoBehaviour {
 	private float mouseDistance;
 	private Rigidbody2D rb;
 
+	private float lastYPos;
+
 	private void Awake()
 	{
 		rb = GetComponent<Rigidbody2D>();
@@ -20,7 +22,9 @@ public class Player : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+
+		lastYPos = transform.position.y;
+
 	}
 	
 	// Update is called once per frame
@@ -31,10 +35,20 @@ public class Player : MonoBehaviour {
 
 		mouseDistance = Mathf.Clamp(xPos - transform.position.x, -1, 1);
 
+		if(transform.position.y > lastYPos + 5)
+		{
+			LevelController.instance.Score(10);
+			lastYPos = transform.position.y;
+		}
+
 	}
 
 	private void FixedUpdate()
 	{
+
+		if (LevelController.instance.gameOver)
+			return;
+
 		rb.velocity = new Vector2(mouseDistance * speed, LevelController.instance.gameSpeed * LevelController.instance.multiplier);
 	}
 
@@ -45,10 +59,13 @@ public class Player : MonoBehaviour {
 
 	public void TakeDamage()
 	{
+		if (LevelController.instance.gameOver)
+			return;
+
 		int children = transform.childCount;
 		if(children <= 1)
 		{
-
+			LevelController.instance.GameOver();
 		}
 		else
 		{
