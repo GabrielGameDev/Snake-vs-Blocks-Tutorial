@@ -8,6 +8,8 @@ public class Pickup : MonoBehaviour {
 	public Text amountText;
 	public GameObject bodyPrefab;
 
+	public AudioClip pickupSound;
+
 	private int amount;
 
 	private void OnEnable()
@@ -20,6 +22,9 @@ public class Pickup : MonoBehaviour {
 	{
 		if (other.CompareTag("Player"))
 		{
+
+			AudioSource.PlayClipAtPoint(pickupSound, Camera.main.transform.position);
+
 			for (int i = 0; i < amount; i++)
 			{
 				int index = other.transform.childCount;
@@ -39,7 +44,9 @@ public class Pickup : MonoBehaviour {
 				player.SetText(player.transform.childCount);
 			}
 
-			gameObject.SetActive(false);
+			
 		}
+
+		gameObject.SetActive(false);
 	}
 }

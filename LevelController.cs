@@ -30,6 +30,8 @@ public class LevelController : MonoBehaviour {
 	public float multiplier = 1;
 	public float cicleTime = 10;
 
+	public AudioClip clickSound;
+
 	public bool gameOver = true;
 
 	private int points;
@@ -64,6 +66,7 @@ public class LevelController : MonoBehaviour {
 
 	public void StartGame()
 	{
+		AudioSource.PlayClipAtPoint(clickSound, Camera.main.transform.position);
 		gamePanel.SetActive(true);
 		startPanel.SetActive(false);
 		gameOver = false;

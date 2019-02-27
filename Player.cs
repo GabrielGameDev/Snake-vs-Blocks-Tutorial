@@ -15,6 +15,9 @@ public class Player : MonoBehaviour {
 
 	private float lastYPos;
 
+	private bool sliding;
+	private int dir;
+
 	private void Awake()
 	{
 		rb = GetComponent<Rigidbody2D>();
@@ -49,7 +52,10 @@ public class Player : MonoBehaviour {
 		if (LevelController.instance.gameOver)
 			return;
 
-		rb.velocity = new Vector2(mouseDistance * speed, LevelController.instance.gameSpeed * LevelController.instance.multiplier);
+		if (!sliding)
+			rb.velocity = new Vector2(mouseDistance * speed, LevelController.instance.gameSpeed * LevelController.instance.multiplier);
+		else
+			rb.velocity = new Vector2(dir * 2.5f, LevelController.instance.gameSpeed * LevelController.instance.multiplier);
 	}
 
 	public void SetText(int amount)
@@ -73,6 +79,18 @@ public class Player : MonoBehaviour {
 		}
 
 		SetText(children - 1);
+	}
+
+	public void Slide(int direction)
+	{
+		sliding = true;
+		dir = direction;
+		Invoke("SetSlideToFalse", 0.25f);
+	}
+
+	void SetSlideToFalse()
+	{
+		sliding = false;
 	}
 
 }

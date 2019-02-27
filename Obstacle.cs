@@ -7,6 +7,8 @@ public class Obstacle : MonoBehaviour {
 
 	public Text amountText;
 
+	public AudioClip impactSound;
+
 	private int amount;
 
 	private Player player;
@@ -80,6 +82,10 @@ public class Obstacle : MonoBehaviour {
 
 	void PlayerDamage()
 	{
+		if (LevelController.instance.gameOver)
+			return;
+
+		AudioSource.PlayClipAtPoint(impactSound, Camera.main.transform.position);
 		nextTime = Time.time + LevelController.instance.damageTime;
 		player.TakeDamage();
 		amount--;
